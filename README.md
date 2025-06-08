@@ -6,7 +6,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![Discord.py](https://img.shields.io/badge/discord.py-2.3.0+-blue.svg)](https://github.com/Rapptz/discord.py)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![License](https://github.com/MrFolium/discord-invite-tracker-bot/blob/main/LICENSE)](LICENSE)
 
 [Features](#-features) • [Installation](#-installation) • [Commands](#-commands) • [Configuration](#-configuration)
 
@@ -139,7 +139,7 @@ discord-invite-bot/
 
 ### 🎛️ Main Configuration
 
-`config/config.json`:
+    `config/config.json`:
 
 ```json
 {
@@ -277,6 +277,6 @@ This project is licensed under the **MIT License**
 
 *Made with ❤️ for Discord communities*
 
-**[⭐ Star this repo](https://github.com/mrfolium/discord-invite-bot)** • **[🍴 Fork it](https://github.com/mrfolium/discord-invite-bot/fork)** • **[📝 Contribute](CONTRIBUTING.md)**
+**[⭐ Star this repo](https://github.com/mrfolium/discord-invite-bot)** • **[🍴 Fork it](https://github.com/MrFolium/discord-invite-tracker-bot/forks)** • 
 
 </div>
