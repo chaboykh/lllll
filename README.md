@@ -49,8 +49,8 @@
 |-------|----------|------|-------------|
 | 🇷🇺 **casual_ru** | Russian | Friendly | Неформальный дружелюбный стиль |
 | 🇷🇺 **formal_ru** | Russian | Professional | Официальный деловой стиль |
-| 🇺🇸 **business_en** | English | Corporate | Professional business communication |
-| 🇺🇸 **friendly_en** | English | Casual | Warm and welcoming style |
+| 🇬🇧 **casual_en** | English | Casual | Warm and welcoming style |
+| 🇬🇧 **formal_en** | English | Professional | Official formal communication |
 
 </div>
 
@@ -61,19 +61,17 @@
 ### Quick Start
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/yourusername/discord-invite-bot.git
-cd discord-invite-bot
+# 1. Download project
+# ZIP: https://github.com/MrFolium/discord-invite-tracker-bot → Download ZIP
+# OR Git:
+git clone https://github.com/MrFolium/discord-invite-tracker-bot.git
 
-# 2. Install dependencies
-pip install -r requirements.txt
+# 2. Setup .env file
+# Edit .env with your bot token and server ID
 
-# 3. Configure environment
-cp .env.example .env
-# Edit .env with your bot token
-
-# 4. Run the bot
-python main.py
+# 3. Run
+# Windows: start.bat
+# Linux: start.sh
 ```
 
 ### 📋 Requirements
@@ -133,8 +131,8 @@ discord-invite-bot/
 │   └── styles/               # Communication styles
 │       ├── casual_ru.json    # 🇷🇺 Casual Russian
 │       ├── formal_ru.json    # 🇷🇺 Formal Russian
-│       ├── business_en.json  # 🇺🇸 Business English
-│       └── friendly_en.json  # 🇺🇸 Friendly English
+│       ├── casual_en.json    # 🇺🇸 Casual English
+│       └── formal_en.json    # 🇺🇸 Formal English
 ├── 💾 data/                   # Bot data (auto-created)
 └── 🔧 .env                    # Environment variables
 ```
