@@ -1,12 +1,23 @@
 @echo off
-title Discord Invite Bot
 echo 🚀 Starting Discord Invite Bot...
 
-REM Check if node_modules exists
-if not exist "node_modules" (
-    echo 📦 Installing dependencies...
-    npm install
+
+REM Check if virtual environment exists
+if not exist "venv" (
+    echo 📦 Creating virtual environment...
+    python -m venv venv
 )
+
+
+REM Activate virtual environment
+echo 🔧 Activating virtual environment...
+call venv\Scripts\activate.bat
+
+
+REM Install requirements
+echo 📥 Installing requirements...
+pip install -r requirements.txt
+
 
 REM Check if .env file exists
 if not exist ".env" (
@@ -15,18 +26,8 @@ if not exist ".env" (
     exit /b 1
 )
 
-REM Check if logs directory exists
-if not exist "logs" (
-    echo 📁 Creating logs directory...
-    mkdir logs
-)
 
-echo 🤖 Starting bot in console mode...
-echo 📝 Logs will be saved to logs/bot.log
-echo 🔄 Bot will run in background after startup...
-echo.
-
-REM Start bot and redirect output to log file while showing in console initially
-node index.js 2>&1 | tee logs/bot.log
-
+REM Start the bot
+echo 🤖 Starting bot...
+python main.py
 pause
