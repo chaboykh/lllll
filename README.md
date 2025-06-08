@@ -131,19 +131,19 @@ discord-invite-bot/
 │   └── styles/               # Communication styles
 │       ├── casual_ru.json    # 🇷🇺 Casual Russian
 │       ├── formal_ru.json    # 🇷🇺 Formal Russian
-│       ├── casual_en.json    # 🇺🇸 Casual English
-│       └── formal_en.json    # 🇺🇸 Formal English
+│       ├── casual_en.json    # 🇬🇧 Casual English
+│       └── formal_en.json    # 🇬🇧 Formal English
 ├── 💾 data/                   # Bot data (auto-created)
 └── 🔧 .env                    # Environment variables
 ```
 
 ### 🎛️ Main Configuration
 
-Create `config/config.json`:
+`config/config.json`:
 
 ```json
 {
-    "current_style": "friendly_en",
+    "current_style": "casual_en",
     "features": {
         "welcome_messages": true,
         "leave_messages": true,
@@ -203,7 +203,7 @@ Create `config/styles/my_style.json`:
 
 ### 🔧 Environment Configuration
 
-Create `.env` file:
+Edite `.env` file:
 
 ```env
 # Discord Bot Configuration
@@ -225,7 +225,7 @@ LOG_LEVEL=INFO
 !styles
 
 # Switch to friendly English
-!setstyle friendly_en
+!setstyle casual_en
 ```
 
 ### 📊 Tracking Invites
@@ -244,7 +244,7 @@ LOG_LEVEL=INFO
 
 ## 🎭 Style Preview
 
-> **Friendly English Style:**
+> **Casual English Style:**
 > 
 > *🎉 Hey there, @newuser! Welcome to our awesome community!*  
 > *👤 Invited by our friend: @inviter*  
