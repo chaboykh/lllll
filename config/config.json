@@ -1,0 +1,14 @@
+{
+    "current_style": "casual_ru",
+    "features": {
+        "welcome_messages": true,
+        "leave_messages": true,
+        "invite_tracking": true,
+        "auto_role_assignment": true
+    },
+    "bot_settings": {
+        "activity_type": "watching",
+        "activity_text": "за новыми участниками",
+        "status": "online"
+    }
+}
