@@ -141,14 +141,21 @@ discord-invite-bot/
 
 ### 🎛️ Main Configuration
 
+Create `config/config.json`:
+
 ```json
 {
-    "current_style": "casual_ru",
+    "current_style": "friendly_en",
     "features": {
         "welcome_messages": true,
         "leave_messages": true,
         "invite_tracking": true,
         "auto_role_assignment": true
+    },
+    "bot_settings": {
+        "activity_type": "watching",
+        "activity_text": "for new members",
+        "status": "online"
     }
 }
 ```
@@ -166,12 +173,48 @@ Create `config/styles/my_style.json`:
         "tone": "Friendly"
     },
     "greetings": [
-        "🎉 Welcome {user}! Invited by {inviter} ({count} invites)"
+        "🎉 Welcome {user}! Invited by {inviter} ({count} invites)",
+        "🌟 Hey {user}! Thanks to {inviter} for bringing you! Total: {count}"
     ],
+    "leave_messages": [
+        "👋 Goodbye {user}! They were invited by {inviter} ({count} invites)",
+        "😢 {user} left us... Originally brought by {inviter} (Count: {count})"
+    ],
+    "default_greeting": "🎉 Welcome {user}!",
+    "default_leave_message": "👋 Goodbye {user}!",
+    "embeds": {
+        "new_member_title": "🎉 New Member",
+        "member_left_title": "👋 Member Left",
+        "invite_count_title": "📊 Invite Statistics",
+        "leaderboard_title": "🏆 Top Inviters",
+        "who_invited_title": "🔍 Invitation Info",
+        "reset_invites_title": "🔄 Reset Statistics"
+    },
     "messages": {
-        "invite_count_message": "📊 {user} has **{count}** invites"
+        "feature_disabled": "❌ This feature is disabled",
+        "invite_count_message": "📊 {user} has **{count}** invites",
+        "no_invites_yet": "📭 No invitations recorded yet",
+        "inviter_unknown": "❓ Unknown who invited {user}",
+        "invited_by_message": "👤 {user} was invited by {inviter}",
+        "inviter_not_found": "❌ Cannot find who invited {user}",
+        "user_invites_reset": "✅ Reset {count} invites for {user}",
+        "all_invites_reset": "✅ Reset statistics for {count} users"
     }
 }
+```
+
+### 🔧 Environment Configuration
+
+Create `.env` file:
+
+```env
+# Discord Bot Configuration
+DISCORD_TOKEN=your_bot_token_here
+GUILD_ID=your_server_id_here
+
+# Optional Settings
+DEBUG=false
+LOG_LEVEL=INFO
 ```
 
 ---
@@ -183,8 +226,8 @@ Create `config/styles/my_style.json`:
 # View all available styles
 !styles
 
-# Switch to business English
-!setstyle business_en
+# Switch to friendly English
+!setstyle friendly_en
 ```
 
 ### 📊 Tracking Invites
@@ -203,11 +246,11 @@ Create `config/styles/my_style.json`:
 
 ## 🎭 Style Preview
 
-> **Casual Russian Style:**
+> **Friendly English Style:**
 > 
-> *🎉 Привет, @newuser! Добро пожаловать к нам!*  
-> *👤 Тебя пригласил: @inviter*  
-> *📊 У него уже 5 приглашений!*
+> *🎉 Hey there, @newuser! Welcome to our awesome community!*  
+> *👤 Invited by our friend: @inviter*  
+> *📊 They've got 5 invites now!*
 
 ---
 
@@ -222,7 +265,7 @@ Create `config/styles/my_style.json`:
 3. 📋 Check console logs for errors
 4. 📖 Review the documentation
 
-**Found a bug?** [Create an issue](https://github.com/yourusername/discord-invite-bot/issues)
+**Found a bug?** [Create an issue](https://github.com/mrfolium/discord-invite-bot/issues)
 
 </div>
 
@@ -236,6 +279,6 @@ This project is licensed under the **MIT License**
 
 *Made with ❤️ for Discord communities*
 
-**[⭐ Star this repo](https://github.com/yourusername/discord-invite-bot)** • **[🍴 Fork it](https://github.com/yourusername/discord-invite-bot/fork)** • **[📝 Contribute](CONTRIBUTING.md)**
+**[⭐ Star this repo](https://github.com/mrfolium/discord-invite-bot)** • **[🍴 Fork it](https://github.com/mrfolium/discord-invite-bot/fork)** • **[📝 Contribute](CONTRIBUTING.md)**
 
 </div>
