@@ -23,18 +23,51 @@ def save_invited_by():
         json.dump(invited_by, f, ensure_ascii=False, indent=4)
 
 def load_invite_data():
-    """Load invite data from files"""
+    """Load invitation data from JSON files"""
     global invite_counts, invited_by
     
-    # Load invite counts
-    if os.path.exists("data/invite_counts.json"):
-        with open("data/invite_counts.json", "r", encoding="utf-8") as f:
-            invite_counts = defaultdict(int, json.load(f))
+    os.makedirs('data', exist_ok=True)
     
-    # Load invited by data
-    if os.path.exists("data/invited_by.json"):
-        with open("data/invited_by.json", "r", encoding="utf-8") as f:
-            invited_by = json.load(f)
+    # Load invite counts
+    invite_file = 'data/invite_counts.json'
+    try:
+        if os.path.exists(invite_file) and os.path.getsize(invite_file) > 0:
+            with open(invite_file, 'r', encoding='utf-8') as f:
+                content = f.read().strip()
+                if content:
+                    invite_counts = defaultdict(int, json.loads(content))
+                else:
+                    invite_counts = defaultdict(int)
+        else:
+            invite_counts = defaultdict(int)
+    except (json.JSONDecodeError, FileNotFoundError) as e:
+        print(f"⚠️  Error loading invite_counts.json: {e}")
+        print("🔄 Creating new file...")
+        invite_counts = defaultdict(int)
+        save_invite_data()
+    
+    # Load member inviter mapping
+    inviter_file = 'data/invited_by.json'
+    try:
+        if os.path.exists(inviter_file) and os.path.getsize(inviter_file) > 0:
+            with open(inviter_file, 'r', encoding='utf-8') as f:
+                content = f.read().strip()
+                if content:
+                    invited_by = json.loads(content)
+                else:
+                    invited_by = {}
+        else:
+            invited_by = {}
+    except (json.JSONDecodeError, FileNotFoundError) as e:
+        print(f"⚠️  Error loading invited_by.json: {e}")
+        print("🔄 Creating new file...")
+        invited_by = {}
+        save_invite_data()
+
+def save_invite_data():
+    """Save invite data to JSON files"""
+    save_invite_counts()
+    save_invited_by()
 
 async def update_inviter_roles(inviter, invite_count, inviter_roles, guild):
     """Update inviter roles based on invite count"""
@@ -179,7 +212,7 @@ async def setup_invite_logger(bot, config_manager):
             
             # Check if inviter should get a role
             await update_inviter_roles(inviter, current_invites_count, INVITER_ROLES, guild)
-            
+                
             # Send welcome message with inviter info
             greeting = config_manager.get_random_greeting()
             formatted_greeting = greeting.format(
@@ -199,7 +232,7 @@ async def setup_invite_logger(bot, config_manager):
         else:
             print(f"⚠️ Could not determine who invited {member.name}")
             # Send default welcome message
-            default_greeting = config_manager.lang_config.get("default_greeting", "Welcome {user}!")
+            default_greeting = config_manager.get_message("default_greeting") or "Welcome {user}!"  
             formatted_greeting = default_greeting.format(user=member.mention)
             
             embed = discord.Embed(
@@ -255,7 +288,7 @@ async def setup_invite_logger(bot, config_manager):
             )
         else:
             # Send default leave message
-            default_leave = config_manager.lang_config.get("default_leave_message", "Goodbye {user}!")
+            default_leave = config_manager.get_message("default_leave_message") or "Goodbye {user}!"
             formatted_message = default_leave.format(user=member.name)
         
         embed = discord.Embed(
@@ -406,4 +439,48 @@ async def setup_invite_logger(bot, config_manager):
         
         await ctx.send(embed=embed)
     
+    @bot.command(name="invitestats")
+    async def invite_stats(ctx):
+        """Show general invite statistics"""
+        if not config_manager.get_feature_enabled("invite_tracking"):
+            await ctx.send(config_manager.get_message("feature_disabled"))
+            return
+        
+        total_invites = sum(invite_counts.values())
+        total_inviters = len([count for count in invite_counts.values() if count > 0])
+        total_members = len(invited_by)
+        
+        stats_text = f"""
+        📊 **Server Invite Statistics**
+        
+        🎯 Total Invites: **{total_invites}**
+        👥 Active Inviters: **{total_inviters}**
+        🆕 Tracked Members: **{total_members}**
+        """
+        
+        embed = discord.Embed(
+            title="📈 Invite Statistics",
+            description=stats_text,
+            color=discord.Color.blue()
+        )
+        embed.timestamp = discord.utils.utcnow()
+        await ctx.send(embed=embed)
+    
+    @bot.command(name="myinvites")
+    async def my_invites(ctx):
+        """Check your own invite count (shortcut)"""
+        await check_invites(ctx, ctx.author)
+    
+    # Error handling for commands
+    @reset_invites.error
+    async def reset_invites_error(ctx, error):
+        if isinstance(error, commands.MissingPermissions):
+            embed = discord.Embed(
+                title="❌ Permission Denied",
+                description="You need Administrator permissions to use this command.",
+                color=discord.Color.red()
+            )
+            await ctx.send(embed=embed)
+    
     print("✅ Invite logger setup completed")
+
