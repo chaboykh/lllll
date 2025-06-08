@@ -1,5 +1,5 @@
 {
-    "current_style": "casual_ru",
+    "current_style": "casual_en",
     "features": {
         "welcome_messages": true,
         "leave_messages": true,
@@ -8,7 +8,7 @@
     },
     "bot_settings": {
         "activity_type": "watching",
-        "activity_text": "за новыми участниками",
+        "activity_text": "unixporn",
         "status": "online"
     }
 }

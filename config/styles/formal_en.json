@@ -1,0 +1,42 @@
+{
+    "style_info": {
+        "name": "Formal English",
+        "description": "Official formal communication style",
+        "language": "English",
+        "tone": "Professional"
+    },
+    "greetings": [
+        "🎉 Welcome to the server, {user}\n👤 Invited by user: {inviter}\n📊 Number of invitations: {count}",
+        "✅ {user} has joined the server\n🤝 Inviter: {inviter}\n📈 Total invitations: {count}",
+        "📋 New member: {user}\n👥 Invitation source: {inviter}\n🎯 Counter: {count}",
+        "🌟 Member {user} has been registered\n💼 Recommender: {inviter}\n📊 Statistics: {count}",
+        "🔔 New member notification: {user}\n📝 Invited by: {inviter}\n📈 Overall count: {count}"
+    ],
+    "leave_messages": [
+        "📤 {user} has left the server\n👤 Inviter: {inviter}\n📊 Invitations: {count}",
+        "❌ Member {user} has departed\n🔗 Invited through: {inviter}\n📈 Quantity: {count}",
+        "📋 {user} disconnected from server\n👥 Inviter: {inviter}\n🎯 Total: {count}",
+        "⚠️ Member {user} has been deactivated\n💼 Recommended by: {inviter}\n📊 Remainder: {count}",
+        "🔕 {user} has concluded participation\n📝 Source: {inviter}\n📉 Current count: {count}"
+    ],
+    "embeds": {
+        "new_member_title": "✅ New Member",
+        "member_left_title": "📤 Member Left Server",
+        "invite_count_title": "📊 Invitation Statistics",
+        "leaderboard_title": "🏆 Inviter Rankings",
+        "who_invited_title": "🔍 Invitation Information",
+        "reset_invites_title": "🔄 Statistics Reset"
+    },
+    "messages": {
+        "default_greeting": "✅ Welcome, {user}",
+        "default_leave_message": "📤 Goodbye, {user}",
+        "feature_disabled": "⚠️ This function is disabled",
+        "invite_count_message": "📊 {user}: **{count}** invitations",
+        "no_invites_yet": "📋 No invitations present",
+        "inviter_unknown": "❓ Invitation source for {user} unknown",
+        "invited_by_message": "👤 {user} invited by: {inviter}",
+        "inviter_not_found": "❌ Inviter for {user} not found",
+        "user_invites_reset": "✅ Reset {count} invitations: {user}",
+        "all_invites_reset": "✅ Statistics reset: {count} users"
+    }
+}
