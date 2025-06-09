@@ -7,7 +7,7 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![Discord.py](https://img.shields.io/badge/discord.py-2.3.0+-blue.svg)](https://github.com/Rapptz/discord.py)
-[![License](https://github.com/MrFolium/discord-invite-tracker-bot/blob/main/LICENSE)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/MrFolium/discord-invite-tracker-bot/blob/main/LICENSE)
 
 
 
