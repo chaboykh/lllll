@@ -201,3 +201,4 @@ if __name__ == "__main__":
         print(f"❌ Failed to start bot: {str(e)}")
     finally:
         log("=== DISCORD BOT SHUTDOWN ===")
+    

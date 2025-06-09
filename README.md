@@ -1,3 +1,4 @@
+
 <div align="center">
 
 # 🎯 Discord Invite Tracker Bot
@@ -8,7 +9,9 @@
 [![Discord.py](https://img.shields.io/badge/discord.py-2.3.0+-blue.svg)](https://github.com/Rapptz/discord.py)
 [![License](https://github.com/MrFolium/discord-invite-tracker-bot/blob/main/LICENSE)](LICENSE)
 
-[Features](#-features) • [Installation](#-installation) • [Commands](#-commands) • [Configuration](#-configuration)
+
+
+[Features](#-features) • [Installation](#-installation) • [Commands](#-commands) • [Configuration](#-configuration) • [Logging](#-logging)
 
 </div>
 
@@ -25,6 +28,7 @@
 - 🎉 **Custom welcome messages**
 - 👋 **Goodbye notifications**
 - 🏆 **Interactive leaderboards**
+- 📝 **Comprehensive logging**
 
 </td>
 <td width="50%">
@@ -34,6 +38,7 @@
 - 🎭 **Communication styles**
 - ⚙️ **Flexible configuration**
 - 🔄 **Hot-reload settings**
+- 🚀 **Background operation**
 
 </td>
 </tr>
@@ -62,21 +67,23 @@
 
 ```bash
 # 1. Download project
-# ZIP: https://github.com/MrFolium/discord-invite-tracker-bot → Download ZIP
+# ZIP: Click "Code" → "Download ZIP"
 # OR Git:
 git clone https://github.com/MrFolium/discord-invite-tracker-bot.git
+cd discord-invite-tracker-bot
 
-# 2. Setup .env file
+# 2. Setup environment
+cp .env.example .env
 # Edit .env with your bot token and server ID
 
-# 3. Run
-# Windows: start.bat
-# Linux: start.sh
+# 3. Run bot
+# Windows: double-click start.bat
+# Linux/Mac: ./start.sh
 ```
 
 ### 📋 Requirements
 - **Python 3.8+**
-- **Discord Bot Token**
+- **Discord Bot Token** ([Get one here](https://discord.com/developers/applications))
 - **Server Administrator Permissions**
 
 ---
@@ -105,14 +112,33 @@ git clone https://github.com/MrFolium/discord-invite-tracker-bot.git
 </details>
 
 <details>
-<summary><b>⚙️ Administration</b></summary>
+<summary><b>⚙️ Administration (Admin Only)</b></summary>
 
 | Command | Description | Usage |
 |---------|-------------|-------|
-| `!resetinvites` | Reset invite counts | `!resetinvites @user` |
+| `!resetinvites` | Reset user invite count | `!resetinvites @user` |
+| `!resetall` | Reset all invite counts | `!resetall` |
 | `!reloadconfig` | Reload configuration | `!reloadconfig` |
 
 </details>
+
+---
+
+## 📝 Logging
+
+The bot includes comprehensive logging system:
+
+- **📁 Automatic log directory creation**
+- **📝 All events logged to `logs/bot.log`**
+- **🚀 Startup and shutdown logging**
+- **❌ Error tracking and debugging**
+- **👥 User activity monitoring**
+
+### Log File Location
+```
+logs/
+└── bot.log    # All bot activity and errors
+```
 
 ---
 
@@ -133,77 +159,19 @@ discord-invite-bot/
 │       ├── formal_ru.json    # 🇷🇺 Formal Russian
 │       ├── casual_en.json    # 🇬🇧 Casual English
 │       └── formal_en.json    # 🇬🇧 Formal English
+├── 🚀 start.bat               # Windows startup script
+├── 🚀 start.sh                # Linux/Mac startup script
+├── 📋 requirements.txt        # Python dependencies
+├── 📄 .env.example           # Environment template
 ├── 💾 data/                   # Bot data (auto-created)
+├── 📝 logs/                   # Bot logs (auto-created)
+│   └── bot.log               # Application logs
 └── 🔧 .env                    # Environment variables
-```
-
-### 🎛️ Main Configuration
-
-    `config/config.json`:
-
-```json
-{
-    "current_style": "casual_en",
-    "features": {
-        "welcome_messages": true,
-        "leave_messages": true,
-        "invite_tracking": true,
-        "auto_role_assignment": true
-    },
-    "bot_settings": {
-        "activity_type": "watching",
-        "activity_text": "for new members",
-        "status": "online"
-    }
-}
-```
-
-### 🎨 Custom Style Creation
-
-Create `config/styles/my_style.json`:
-
-```json
-{
-    "style_info": {
-        "name": "My Custom Style",
-        "description": "Personalized communication style",
-        "language": "English",
-        "tone": "Friendly"
-    },
-    "greetings": [
-        "🎉 Welcome {user}! Invited by {inviter} ({count} invites)",
-        "🌟 Hey {user}! Thanks to {inviter} for bringing you! Total: {count}"
-    ],
-    "leave_messages": [
-        "👋 Goodbye {user}! They were invited by {inviter} ({count} invites)",
-        "😢 {user} left us... Originally brought by {inviter} (Count: {count})"
-    ],
-    "default_greeting": "🎉 Welcome {user}!",
-    "default_leave_message": "👋 Goodbye {user}!",
-    "embeds": {
-        "new_member_title": "🎉 New Member",
-        "member_left_title": "👋 Member Left",
-        "invite_count_title": "📊 Invite Statistics",
-        "leaderboard_title": "🏆 Top Inviters",
-        "who_invited_title": "🔍 Invitation Info",
-        "reset_invites_title": "🔄 Reset Statistics"
-    },
-    "messages": {
-        "feature_disabled": "❌ This feature is disabled",
-        "invite_count_message": "📊 {user} has **{count}** invites",
-        "no_invites_yet": "📭 No invitations recorded yet",
-        "inviter_unknown": "❓ Unknown who invited {user}",
-        "invited_by_message": "👤 {user} was invited by {inviter}",
-        "inviter_not_found": "❌ Cannot find who invited {user}",
-        "user_invites_reset": "✅ Reset {count} invites for {user}",
-        "all_invites_reset": "✅ Reset statistics for {count} users"
-    }
-}
 ```
 
 ### 🔧 Environment Configuration
 
-Edite `.env` file:
+Edit `.env` file:
 
 ```env
 # Discord Bot Configuration
@@ -224,8 +192,11 @@ LOG_LEVEL=INFO
 # View all available styles
 !styles
 
-# Switch to friendly English
-!setstyle casual_en
+# Switch to friendly Russian
+!setstyle casual_ru
+
+# Switch to professional English
+!setstyle formal_en
 ```
 
 ### 📊 Tracking Invites
@@ -236,34 +207,55 @@ LOG_LEVEL=INFO
 # Check someone else's invites
 !invites @username
 
-# View leaderboard
-!leaderboard 5
+# View top 10 inviters
+!leaderboard 10
+
+# Find who invited a user
+!whoinvited @newmember
+```
+
+### 🔧 Administration
+```bash
+# Reset specific user's invites
+!resetinvites @user
+
+# Reset all invite statistics
+!resetall
+
+# Reload bot configuration
+!reloadconfig
 ```
 
 ---
 
 ## 🎭 Style Preview
 
-> **Casual English Style:**
+> **Casual Russian Style:**
 > 
-> *🎉 Hey there, @newuser! Welcome to our awesome community!*  
-> *👤 Invited by our friend: @inviter*  
-> *📊 They've got 5 invites now!*
+> *🎉 Привет, @newuser! Добро пожаловать в наше сообщество!*  
+> *👤 Пригласил: @inviter*  
+> *📊 У него теперь 5 приглашений!*
+
+> **Formal English Style:**
+> 
+> *🎉 Welcome to the server, @newuser.*  
+> *👤 Invited by: @inviter*  
+> *📊 Current invitation count: 5*
 
 ---
 
-## 🤝 Support
+## 🛠️ Troubleshooting
 
 <div align="center">
 
-**Need help?** Check these steps:
+**Common Issues:**
 
-1. ✅ Verify your `.env` configuration
-2. 🔐 Ensure bot has proper server permissions
-3. 📋 Check console logs for errors
-4. 📖 Review the documentation
+1. ✅ **Bot not responding?** Check your `.env` configuration
+2. 🔐 **Permission errors?** Ensure bot has Administrator permissions
+3. 📋 **Startup issues?** Check `logs/bot.log` for errors
+4. 🔄 **Commands not working?** Try `!reloadconfig`
 
-**Found a bug?** [Create an issue](https://github.com/mrfolium/discord-invite-bot/issues)
+**Still need help?** [Create an issue](https://github.com/MrFolium/discord-invite-tracker-bot/issues)
 
 </div>
 
@@ -277,6 +269,6 @@ This project is licensed under the **MIT License**
 
 *Made with ❤️ for Discord communities*
 
-**[⭐ Star this repo](https://github.com/mrfolium/discord-invite-bot)** • **[🍴 Fork it](https://github.com/MrFolium/discord-invite-tracker-bot/forks)** • 
+**[⭐ Star this repo](https://github.com/MrFolium/discord-invite-tracker-bot)** • **[🍴 Fork it](https://github.com/MrFolium/discord-invite-tracker-bot/fork)** • **[📝 Report Issues](https://github.com/MrFolium/discord-invite-tracker-bot/issues)**
 
 </div>
